@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Card, { CardVariant } from "./components/Card";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Card
+        width="400px"
+        height="400px"
+        cursor="pointer"
+        title="не нажимай!"
+        variant={CardVariant.outlined}
+        onClick={(num) => {
+          alert(`${num} секунд без проишествий на странице`);
+        }}
+      >
+        <img
+          src="https://i.pinimg.com/474x/b5/12/42/b51242fccb4c559383eee0fe0295eeaf.jpg"
+          alt=""
+        />
+        <h1 style={{ color: "white" }}>Mike Wazovski</h1>
+      </Card>
     </div>
   );
 }
