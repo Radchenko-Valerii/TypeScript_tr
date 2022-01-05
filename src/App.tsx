@@ -1,7 +1,30 @@
-
 import Card, { CardVariant } from "./components/Card";
+import { UserList } from "./components/UserList";
+import { IUser } from "./types/types";
 
 function App() {
+  const users: IUser[] = [
+    {
+      id: 1,
+      name: "Nik",
+      email: "nik@nik.com",
+      address: {
+        city: "Zaporizhzhie",
+        zipcode: "69006",
+        street: "Soborniy 77",
+      },
+    },
+    {
+      id: 2,
+      name: "Edmiral Hakumba",
+      email: "kingof_CONGO@drc.gov.com",
+      address: {
+        city: "Kinshasa",
+        zipcode: "Postal codes are not used in Congo",
+        street: "Diktator str",
+      },
+    },
+  ];
   return (
     <div>
       <Card
@@ -20,6 +43,7 @@ function App() {
         />
         <h1 style={{ color: "white" }}>Mike Wazovski</h1>
       </Card>
+      <UserList users={users} />
     </div>
   );
 }
