@@ -5,6 +5,8 @@ import List from "./components/List";
 import { UserItem } from "./components/UserItem";
 import { TodoItem } from "./components/TodoItem";
 import { ITodo, IUser } from "./types/types";
+import { Events } from "./components/Events";
+import { DragEvent } from "./components/DragEvent";
 
 function App() {
   // const users: IUser[] = [
@@ -74,6 +76,8 @@ function App() {
         />
         <h1 style={{ color: "white" }}>Mike Wazovski</h1>
       </Card>
+      <Events/>
+      <DragEvent/>
       <List
         items={users}
         renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}
