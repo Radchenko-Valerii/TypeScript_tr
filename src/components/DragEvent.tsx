@@ -1,10 +1,11 @@
-import React, { FC, ReactEventHandler, useState } from "react";
+import React, { FC, useState } from "react";
 
 export const DragEvent: FC = () => {
-  const [isDrag, setIsDrag] = useState<boolean>(true);
+  const [isDrag, setIsDrag] = useState<boolean>(false);
 
   const overHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
+    setIsDrag(true)
   };
 
   const leaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
@@ -14,7 +15,7 @@ export const DragEvent: FC = () => {
 
   const dropHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
-    setIsDrag(false)
+    setIsDrag(true)
   };
 
   return (
@@ -26,12 +27,12 @@ export const DragEvent: FC = () => {
       ></div>
       <div
         onDrop={dropHandler}
-        onDragOver={overHandler}
         onDragLeave={leaveHandler}
+        onDragOver={overHandler}
         style={{
           width: "200px",
           height: "200px",
-          background: isDrag ? "blue" : "red",
+          background: isDrag ? "red" : "blue",
           marginTop: "20px",
         }}
       ></div>
