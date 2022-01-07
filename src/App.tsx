@@ -1,12 +1,10 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import Card, { CardVariant } from "./components/Card";
-import List from "./components/List";
-import { UserItem } from "./components/UserItem";
-import { TodoItem } from "./components/TodoItem";
-import { ITodo, IUser } from "./types/types";
-import { Events } from "./components/Events";
-import { DragEvent } from "./components/DragEvent";
+import {BrowserRouter, NavLink, Route} from 'react-router-dom';
+import { CardPage } from './pages/CardPage';
+import { DragEventPage } from './pages/DragEventPage';
+import { EventsPage } from './pages/EventsPage';
+import { ToDoPage } from './pages/ToDoPage';
+import { UserListPage } from './pages/UserListPage';
+import { UserPage } from './pages/UserPage';
 
 function App() {
   // const users: IUser[] = [
@@ -32,60 +30,53 @@ function App() {
   //   },
   // ];
 
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [todos, setTodos] = useState<ITodo[]>([]);
-
-  useEffect(() => {
-    fetchUsers("https://jsonplaceholder.typicode.com/users");
-    fetchTodos("https://jsonplaceholder.typicode.com/todos?_limit=8");
-  }, []);
-
-  async function fetchUsers(url: string) {
-    try {
-      const response = await axios.get<IUser[]>(url);
-      setUsers(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function fetchTodos(url: string) {
-    try {
-      const response = await axios.get<ITodo[]>(url);
-      setTodos(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
+  
 
   return (
     <div>
-      <Card
-        width="400px"
-        height="400px"
-        cursor="pointer"
-        title="не нажимай!"
-        variant={CardVariant.outlined}
-        onClick={(num) => {
-          alert(`${num} секунд без проишествий на странице`);
-        }}
-      >
-        <img
-          src="https://i.pinimg.com/474x/b5/12/42/b51242fccb4c559383eee0fe0295eeaf.jpg"
-          alt=""
-        />
-        <h1 style={{ color: "white" }}>Mike Wazovski</h1>
-      </Card>
-      <Events/>
-      <DragEvent/>
-      <List
-        items={users}
-        renderItem={(user: IUser) => <UserItem user={user} key={user.id} />}
-      />
-      <List
-        items={todos}
-        renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}
-      />
+      <BrowserRouter>
+      <div>
+        <NavLink to="/users">
+          Users
+        </NavLink>
+        <NavLink to="/todos">
+          ToDo
+        </NavLink>
+        <NavLink to="/events">
+          Events
+        </NavLink>
+        <NavLink to="/drags">
+          Drag
+        </NavLink>
+        <NavLink to="/founder">
+          Founder
+        </NavLink>
+      </div>
+      <Route path={"/users"} exact>
+        <UserListPage/>
+      </Route>
+      <Route path={"/todos"} exact>
+        <ToDoPage/>
+      </Route>
+      <Route path={"/users/:id"} exact>
+        <UserPage/>
+      </Route>
+      <Route path={"/events"} exact>
+        <EventsPage/>
+      </Route>
+      <Route path={"/drags"} exact>
+        <DragEventPage/>
+      </Route>
+      <Route path={"/founder"} exact>
+        <CardPage/>
+      </Route>
+      
+      </BrowserRouter>
+      
+      
+      
+      
     </div>
   );
 }
